@@ -11,6 +11,7 @@ for (var room_name in Game.rooms) {
     console.log(room_name);
 }
 
+/*
 for (var sp_name in Game.spawns) {
     var spawn = Game.spawns[sp_name];
     spawner(spawn);
@@ -32,3 +33,4 @@ for (var cr_name in Game.creeps) {
         healer(creep);
     }
 }
+*/

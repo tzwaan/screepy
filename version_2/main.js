@@ -6,6 +6,11 @@ var spawner = require('spawn');
 var _ = require('lodash');
 
 
+for (var room_name in Game.rooms) {
+    var room = Game.rooms[room_name];
+    console.log(room_name);
+}
+
 for (var sp_name in Game.spawns) {
     var spawn = Game.spawns[sp_name];
     spawner(spawn);

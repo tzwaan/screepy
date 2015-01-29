@@ -1,36 +1,34 @@
-var harvester = require('harvester');
-var builder = require('builder');
-var guard = require('guard');
-var healer = require('healer');
-var spawner = require('spawn');
 var _ = require('lodash');
+var C = require('constants');
+var spawner = require('spawn');
 
 
 for (var room_name in Game.rooms) {
     var room = Game.rooms[room_name];
-    console.log(room_name);
-}
+    var nr_extensions = room.find(Game.MY_STRUCTURES, {
+        filter: function(structure) {
+            return (structure.structureType == Game.STRUCTURE_EXTENSION);
+        }
+    }).length;
+    var total_parts = 5 + nr_extensions;
 
-/*
-for (var sp_name in Game.spawns) {
-    var spawn = Game.spawns[sp_name];
-    spawner(spawn);
-}
-for (var cr_name in Game.creeps) {
-    var creep = Game.creeps[cr_name];
-    var role = creep.memory.role;
+    var sources = room.find(Game.SOURCES);
+    if (!Memory.sources) {
+        console.log("Initializing sources");
+        Memory.sources = {};
+        for (var src_name in sources) {
+            var id = sources[src_name].id;
+            Memory.sources[id] = {"workforce" : 0, "carryforce" : 0};
+        }
+    }
 
-    if (role == 'harvester') {
-        harvester(creep);
-    }
-    else if (role == 'builder') {
-        builder(creep);
-    }
-    else if (role == 'guard') {
-        guard(creep);
-    }
-    else if (role == 'healer') {
-        healer(creep);
+    var spawn = room.find(Game.MY_SPAWNS)[0];
+    var source = spawn.pos.findClosest(Game.SOURCES);
+    source.mem = Memory.sources[source.id];
+    console.log(source.mem.workforce);
+
+    if (source.mem.workforce < 5) {
+        /* need to update workforce after spawn */
+        spawner(spawn, C.MINER, 5 - source.mem.workforce, total_parts, source);
     }
 }
-*/

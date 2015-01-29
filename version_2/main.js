@@ -49,7 +49,7 @@ for (var room_name in Game.rooms) {
                 total_parts,
                 source
         );
-        Memory.sources[source.id].workforce += new_workforce;
+        Memory.sources[source.id].carryforce += new_workforce;
     }
 
     creep_commander(Game.creeps);

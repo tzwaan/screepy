@@ -13,7 +13,7 @@ module.exports = function(spawn, type, spec_parts, total_parts, target) {
             body.push(Game.WORK);
         }
         /* need to add initialization memory */
-        var memory = {"target_id" : target.id};
+        var memory = {"type": C.MINER, "target_id" : target.id};
         spawn.createCreep(body, null, memory);
 
         return body.length - 2;

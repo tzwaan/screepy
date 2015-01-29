@@ -1,6 +1,7 @@
 var _ = require('lodash');
 var C = require('constants');
 var spawner = require('spawn');
+var commander = require('creep_commander');
 
 
 for (var room_name in Game.rooms) {
@@ -25,11 +26,12 @@ for (var room_name in Game.rooms) {
     var spawn = room.find(Game.MY_SPAWNS)[0];
     var source = spawn.pos.findClosest(Game.SOURCES);
     source.mem = Memory.sources[source.id];
-    console.log(source.mem.workforce);
 
     if (source.mem.workforce < 5) {
         /* need to update workforce after spawn */
         var new_workforce = spawner(spawn, C.MINER, 5 - source.mem.workforce, total_parts, source);
         Memory.sources[source.id].workforce += new_workforce;
     }
+
+    commander(Game.creeps);
 }

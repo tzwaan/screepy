@@ -36,9 +36,12 @@ module.exports = function(creep) {
         console.log("finding closest dedicated miner");
         target = creep.pos.findClosest(Game.MY_CREEPS, {
             filter: function(object) {
-                return object.memory.target_id == creep.memory.target_id;
+                return (object.memory.target_id == creep.memory.target_id
+                    &&
+                    object.memory.type == C.MINER);
             }
         });
+        console.log(target);
         creep.moveTo(target);
         console.log("moving to miner");
     }

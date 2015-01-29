@@ -35,7 +35,7 @@ for (var room_name in Game.rooms) {
         var new_workforce = spawner(
                 spawn,
                 C.MINER,
-                5 - Memory.source[source.id].workforce,
+                5 - Memory.sources[source.id].workforce,
                 total_parts,
                 source
         );

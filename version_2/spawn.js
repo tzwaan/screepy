@@ -12,10 +12,31 @@ module.exports = function(spawn, type, spec_parts, total_parts, target) {
         for (var i = 0; i < spec_parts && body.length < total_parts ; i++) {
             body.push(Game.WORK);
         }
-        /* need to add initialization memory */
         var memory = {"type": C.MINER, "target_id" : target.id};
         spawn.createCreep(body, null, memory);
 
         return body.length - 2;
     }
- }
+
+    if (type == C.CARRIER) {
+        body = [];
+        for (var i = 0; i < spec_parts && body.length < total_parts; i++) {
+            if (i % 2) {
+                body.push(Game.CARRY);
+            }
+            else {
+                body.push(Game.MOVE);
+            }
+        }
+        var memory = {"type": C.CARRIER, "target_id": target.id};
+        spawn.createCreep(body, null, memory);
+        Memory.sources[target.id].distance;
+        if (body.length % 2) {
+            distance *= 3;
+        }
+        else {
+            distance *= 2;
+        }
+        return body.length / distance;
+    }
+}

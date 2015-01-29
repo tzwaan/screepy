@@ -3,6 +3,7 @@
  */
 var C = require('constants');
 var miner = require('miner');
+var carrier = require('carrier');
 
 module.exports = function(creeps) {
     for (var c_name in creeps) {
@@ -10,6 +11,9 @@ module.exports = function(creeps) {
 
         if (creep.memory.type == C.MINER) {
             miner(creep);
+        }
+        else if (creep.memory.type == C.CARRIER) {
+            carrier(creep);
         }
     }
 }

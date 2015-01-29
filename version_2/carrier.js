@@ -19,7 +19,8 @@ module.exports = function(creep) {
             return;
         }
     }
-    var targets = creep.pos.findInRange(Game.ENERGY, 4);
+    var targets = creep.pos.findInRange(Game.DROPPED_ENERGY, 4);
+    console.log(targets);
     if (targets.length > 0) {
         console.log("energy nearby");
         target = creep.pos.findClosest(targets);

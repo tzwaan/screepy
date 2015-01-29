@@ -38,6 +38,6 @@ module.exports = function(spawn, type, spec_parts, total_parts, target) {
         else {
             distance *= 2;
         }
-        return body.length / distance;
+        return Math.ceil(body.length / distance);
     }
 }

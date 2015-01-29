@@ -30,7 +30,7 @@ module.exports = function(spawn, type, spec_parts, total_parts, target) {
         }
         var memory = {"type": C.CARRIER, "target_id": target.id};
         spawn.createCreep(body, null, memory);
-        Memory.sources[target.id].distance;
+        var distance = Memory.sources[target.id].distance;
         if (body.length % 2) {
             distance *= 3;
         }

@@ -26,7 +26,7 @@ module.exports = function(creep) {
         }
     }
     else {
-        var target = Game.findClosest(Game.MY_CREEPS, {
+        var target = creep.pos.findClosest(Game.MY_CREEPS, {
             filter: function(object) {
                 return object.memory.target_id == creep.memory.target_id;
             }

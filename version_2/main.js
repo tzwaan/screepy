@@ -29,6 +29,7 @@ for (var room_name in Game.rooms) {
 
     if (source.mem.workforce < 5) {
         /* need to update workforce after spawn */
-        spawner(spawn, C.MINER, 5 - source.mem.workforce, total_parts, source);
+        var new_workforce = spawner(spawn, C.MINER, 5 - source.mem.workforce, total_parts, source);
+        Memory.sources[source.id].workforce += new_workforce;
     }
 }

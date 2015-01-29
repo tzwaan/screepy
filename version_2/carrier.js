@@ -4,8 +4,9 @@
 var C = require('constants');
 
 module.exports = function(creep) {
+    var target = 0;
     if (creep.energy == creep.energyCapacity) {
-        var target = creep.pos.findClosest(Game.MY_SPAWNS);
+        target = creep.pos.findClosest(Game.MY_SPAWNS);
         if (creep.pos.isNearTo(target)) {
             creep.transferEnergy(target);
             return;
@@ -15,9 +16,9 @@ module.exports = function(creep) {
             return;
         }
     }
-    var targets = creep.pos.findInRange(Game.ENERGY, 4)
+    var targets = creep.pos.findInRange(Game.ENERGY, 4);
     if (targets.length > 0) {
-        var target = creep.pos.findClosest(targets);
+        target = creep.pos.findClosest(targets);
         if (creep.pos.isNearTo(target)) {
             creep.pickup(target);
         }
@@ -26,11 +27,11 @@ module.exports = function(creep) {
         }
     }
     else {
-        var target = creep.pos.findClosest(Game.MY_CREEPS, {
+        target = creep.pos.findClosest(Game.MY_CREEPS, {
             filter: function(object) {
                 return object.memory.target_id == creep.memory.target_id;
             }
         });
         creep.moveTo(target);
     }
-}
+};

@@ -22,10 +22,10 @@ module.exports = function(spawn, type, spec_parts, total_parts, target) {
         body = [];
         for (var i = 0; i < spec_parts && body.length < total_parts; i++) {
             if (i % 2) {
-                body.push(Game.CARRY);
+                body.push(Game.MOVE);
             }
             else {
-                body.push(Game.MOVE);
+                body.push(Game.CARRY);
             }
         }
         var memory = {"type": C.CARRIER, "target_id": target.id};

@@ -6,35 +6,34 @@ var C = require('constants');
 module.exports = function(creep) {
     var target = 0;
     if (creep.energy == creep.energyCapacity) {
-        console.log("energy full");
+        creep.say("energy full");
         target = creep.pos.findClosest(Game.MY_SPAWNS);
         if (creep.pos.isNearTo(target)) {
             creep.transferEnergy(target);
-            console.log("transferring to spawn");
+            creep.say("transferring to spawn");
             return;
         }
         else {
             creep.moveTo(target);
-            console.log("moving to spawn");
+            creep.say("moving to spawn");
             return;
         }
     }
     var targets = creep.pos.findInRange(Game.DROPPED_ENERGY, 4);
-    console.log(targets);
     if (targets.length > 0) {
-        console.log("energy nearby");
+        creep.say("energy nearby");
         target = creep.pos.findClosest(targets);
         if (creep.pos.isNearTo(target)) {
-            console.log("picking up energy");
+            creep.say("picking up energy");
             creep.pickup(target);
         }
         else {
-            console.log("moving to energy");
+            creep.say("moving to energy");
             creep.moveTo(target);
         }
     }
     else {
-        console.log("finding closest dedicated miner");
+        creep.say("finding closest dedicated miner");
         target = creep.pos.findClosest(Game.MY_CREEPS, {
             filter: function(object) {
                 return (object.memory.target_id == creep.memory.target_id
@@ -42,8 +41,8 @@ module.exports = function(creep) {
                     object.memory.type == C.MINER);
             }
         });
-        console.log(target);
+        creep.say(target);
         creep.moveTo(target);
-        console.log("moving to miner");
+        creep.say("moving to miner");
     }
 };
